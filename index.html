@@ -1,29 +1,47 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | CyberSecurityTyping</title>
-    <link rel="shortcut icon" href="TemplateData/favicon.ico">
-    <link rel="stylesheet" href="TemplateData/style.css">
-  </head>
-  <body>
-    <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width=960 height=600></canvas>
-      <div id="unity-loading-bar">
-        <div id="unity-logo"></div>
-        <div id="unity-progress-bar-empty">
-          <div id="unity-progress-bar-full"></div>
-        </div>
-      </div>
-      <div id="unity-warning"> </div>
-      <div id="unity-footer">
-        <div id="unity-webgl-logo"></div>
-        <div id="unity-fullscreen-button"></div>
-        <div id="unity-build-title">CyberSecurityTyping</div>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Unity WebGL Player | CyberSecurityTyping</title>
+  <link rel="shortcut icon" href="TemplateData/favicon.ico">
+  <link rel="stylesheet" href="TemplateData/style.css">
+</head>
+
+<body>
+  <!-- デスクトップからのアクセス時（通常）に表示 -->
+  <div id="desktop-normal">
+    <a href="https://kenta1023.github.io/Cyber_Security_Learning_Plaza/" class="btn">ホームに戻る</a>
+    <p>
+      パソコンからのアクセスのみ動作します。<br>
+      Escを押すことでゲーム途中での終了が可能です。
+    </p>
+  </div>
+
+  <!-- スマホからのアクセス時に表示 -->
+  <div id="mobile-warning" style="display: none;">
+    <p>このページはパソコンからのアクセスのみ対応しています。</p>
+    <a href="https://kenta1023.github.io/Cyber_Security_Learning_Plaza/" class="btn">ホームに戻る</a>
+  </div>
+
+  <div id="unity-container" class="unity-desktop">
+    <canvas id="unity-canvas" width=960 height=600></canvas>
+    <div id="unity-loading-bar">
+      <div id="unity-logo"></div>
+      <div id="unity-progress-bar-empty">
+        <div id="unity-progress-bar-full"></div>
       </div>
     </div>
-    <script>
+    <div id="unity-warning"> </div>
+    <div id="unity-footer">
+      <div id="unity-webgl-logo"></div>
+      <div id="unity-fullscreen-button"></div>
+      <div id="unity-build-title">CyberSecurityTyping</div>
+    </div>
+  </div>
+  <script>
+    if (!(/iPhone|iPad|iPod|Android/i.test(navigator.userAgent))) {
       var container = document.querySelector("#unity-container");
       var canvas = document.querySelector("#unity-canvas");
       var loadingBar = document.querySelector("#unity-loading-bar");
@@ -114,6 +132,12 @@
         });
       };
       document.body.appendChild(script);
-    </script>
-  </body>
+    } else {
+      // スマホ用の警告メッセージとボタンのみ表示
+      document.querySelector("#unity-container").style.display = "none";
+      document.querySelector("#desktop-normal").style.display = "none";
+      document.querySelector("#mobile-warning").style.display = "block";
+    }
+  </script>
+</body>
 </html>
